@@ -1,0 +1,44 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "redis": {
+    "host": "localhost",
+    "port": 6379
+  },
+  "redisCache" : {
+   "defaultDuration": 3600,
+   "parseNestedRoutes": true,
+   "removePathFromCacheKey": true,
+   "env": "NODE_ENV"
+  },
+  "public": "../public/",
+  "paginate": {
+    "default": 10,
+    "max": 50
+  },
+  "authentication": {
+    "secret": "4d84495cb4fe6be81b3ac205b9edbf10d13874072d3cb33d65849861dfed3253750dd79adf57723d0213ed614301157d1a735234237485195727db31f5a81c80d1357bd10f45ec86e653eaba054e62cecd1b0e71480faefd1e24d2f309fe55e13741f988494ae3e94e5fcc145f86ab7902aa4a901ac4ca984958f2b7fdd3fd89ade0a56b7b9991a5cb363d1b41b35ee17de908d44404df22f6aab56b4cd17abe3f7714667e287bd621c4a6cf05d952eeb47643054553935273e172f52d26b18975eaa0d347b93e3325cd37010b9e94972d1f5a9b5098ad06c57f6670a21dc38266998cfc373eac928baa7dcbfdf17bb640ed5a8883331f799f85b252099e9d8a",
+    "strategies": [
+      "jwt",
+      "local"
+    ],
+    "path": "/authentication",
+    "service": "users",
+    "jwt": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "https://yourdomain.com",
+      "subject": "anonymous",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "entity": "user",
+      "usernameField": "email",
+      "passwordField": "password"
+    }
+  },
+  "mongodb": "mongodb://localhost:27017/marvelauctions"
+}
