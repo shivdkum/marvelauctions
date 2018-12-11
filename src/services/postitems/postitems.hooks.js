@@ -10,13 +10,13 @@ const postitemUpdate = require('../../hooks/postitem-update');
 
 module.exports = {
   before: {
-    all: [ authenticate('jwt') ],
-    find: [redisBefore()],
-    get: [redisBefore()],
-    create: [
+    all: [],
+    find: [],
+    get: [],
+    create: [ authenticate('jwt'),
       auth.associateCurrentUser({ idField: 'username', as: 'seller_username' })
     ],
-    update: [
+    update: [ authenticate('jwt'),
       placeBid(),
       auth.associateCurrentUser({ idField: 'username', as: 'top_bidder' }),
       // postitemUpdate()
@@ -24,15 +24,15 @@ module.exports = {
     patch: [
       placeBid(),
       auth.associateCurrentUser({ idField: 'username', as: 'top_bidder' }),
-      // postitemUpdate()
+    //   postitemUpdate()
     ],
     remove: []
   },
 
   after: {
     all: [],
-    find: [cache({duration: 3600 * 24 * 7}), redisAfter()],
-    get: [cache({duration: 3600 * 24 * 7}), redisAfter()],
+    find: [],
+    get: [],
     create: [],
     update: [],
     patch: [],

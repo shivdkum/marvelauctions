@@ -11,7 +11,9 @@ module.exports = function (app) {
     start_time: { type: Date, required: true},
     end_time: { type: Date, required: true},
     seller_username: { type: String, required: false},
-    top_bidder: { type: String, required: false}
+    top_bidder: { type: String, required: false},
+    description: { type: String, required: false},
+    url: { type: String, required: false}
   }, {
     timestamps: true
   });

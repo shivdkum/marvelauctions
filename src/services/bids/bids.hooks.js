@@ -4,13 +4,18 @@ const redisBefore = require('feathers-hooks-rediscache').redisBeforeHook;
 const redisAfter = require('feathers-hooks-rediscache').redisAfterHook;
 const cache = require('feathers-hooks-rediscache').hookCache;
 
+const newbid = require('../../hooks/newbid');
+
+const deletequeue = require('../../hooks/deletequeue');
+
 module.exports = {
   before: {
-    all: [ authenticate('jwt') ],
+    all: [],
     find: [redisBefore()],
     get: [redisBefore()],
-    create: [
-      auth.associateCurrentUser({ idField: 'username', as: 'bidder' }, { idField: '_id', as: 'product_id'})
+    create: [ authenticate('jwt'),
+      auth.associateCurrentUser({ idField: 'username', as: 'bidder' }),
+      //newbid()
     ],
     update: [],
     patch: [],
@@ -21,7 +26,9 @@ module.exports = {
     all: [],
     find: [cache({duration: 3600 * 24 * 7}), redisAfter()],
     get: [cache({duration: 3600 * 24 * 7}), redisAfter()],
-    create: [],
+    create: [
+      deletequeue()
+    ],
     update: [],
     patch: [],
     remove: []

@@ -17,6 +17,7 @@ const notFound = require('feathers-errors/not-found');
 const middleware = require('./middleware');
 const services = require('./services');
 const appHooks = require('./app.hooks');
+// const sync = require('feathers-sync');
 
 const authentication = require('./authentication');
 
@@ -53,6 +54,15 @@ app.configure(rest());
 app.configure(socketio());
 app.configure(redisClient);
 app.use('/cache', routes(app));
+
+//Sync Setup
+// app.configure(sync.mongodb({
+//  db: existingConnection
+//  collection: 'events'
+//}));
+//app.configure(sync.redis({
+//  db: redisInstance
+//}));
 
 // Configure other middleware (see `middleware/index.js`)
 app.configure(middleware);
