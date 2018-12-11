@@ -2,6 +2,7 @@
 // For more information on hooks see: http://docs.feathersjs.com/api/hooks.html
 const errors = require('feathers-errors');
 const RedisSMQ = require("rsmq");
+const auth = require('feathers-authentication-hooks');
 const rsmq = new RedisSMQ({
   host: "127.0.0.1",
   port: 6379, ns: "rsmq"

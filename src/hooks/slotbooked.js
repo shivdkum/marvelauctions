@@ -9,19 +9,18 @@ const rsmq = new RedisSMQ({
 });
 
 module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
-  return function placeBid (hook) {
-
+  return function slotbooked (hook) {
     // Hooks can either return nothing or a promise
     // that resolves with the `hook` object for asynchronous operations
-    id = `${hook.data.top_bidder}`;
-    price = `${hook.data.current_price}`;
+    starttime = `${hook.data.start_time}`
+    date = `${hook.data.date}`
 
-    rsmq.createQueue({ qname: 'webhook-queue'}, (err, resp) => {
-    if (resp === 1) console.log('queue created');
+    rsmq.createQueue({ qname: 'auction-queue'}, (err, resp) => {
+    if (resp === 1) console.log('auction queue created');
 
   rsmq.sendMessage({
     qname: 'webhook-queue',
-    message: `${price} ${id}`,
+    message: `${date} ${starttime}`,
   }, (err, resp) => {
     if (resp) console.log('Message sent. ID:', resp);
     });

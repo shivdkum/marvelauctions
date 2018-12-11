@@ -8,8 +8,9 @@ module.exports = function (app) {
   const postitems = new Schema({
     product_name: { type: String, required: true },
     current_price: { type: Number, required: true},
-    start_time: { type: Date, required: true},
-    end_time: { type: Date, required: true},
+    date: { type: String, required: true},
+    start_time: { type: String, required: true},
+    end_time: { type: String, required: true},
     seller_username: { type: String, required: false},
     top_bidder: { type: String, required: false},
     description: { type: String, required: false},

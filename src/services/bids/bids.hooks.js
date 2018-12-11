@@ -13,10 +13,7 @@ module.exports = {
     all: [],
     find: [redisBefore()],
     get: [redisBefore()],
-    create: [ authenticate('jwt'),
-      auth.associateCurrentUser({ idField: 'username', as: 'bidder' }),
-      //newbid()
-    ],
+    create: [ auth.associateCurrentUser({ idField: 'username', as: 'bidder' })],
     update: [],
     patch: [],
     remove: []

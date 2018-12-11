@@ -1,12 +1,14 @@
 const { authenticate } = require('feathers-authentication').hooks;
 
+const deleteauctionslot = require('../../hooks/deleteauctionslot');
+
 module.exports = {
   before: {
-    all: [ authenticate('jwt') ],
+    all: [],
     find: [],
     get: [],
     create: [
-
+   authenticate('jwt')
     ],
     update: [],
     patch: [],
@@ -20,7 +22,7 @@ module.exports = {
     create: [],
     update: [],
     patch: [],
-    remove: []
+    remove: [ deleteauctionslot() ]
   },
 
   error: {

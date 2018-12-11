@@ -6,8 +6,9 @@ module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
   const auctions = new Schema({
-    start_time: { type: Date, required: true},
-    end_time: { type: Date, required: true},
+    date: { type: String, required: true},
+    start_time: { type: String, required: true},
+    end_time: { type: String, required: true}
   }, {
     timestamps: true
   });

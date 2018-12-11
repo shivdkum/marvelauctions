@@ -3,6 +3,8 @@ const createService = require('feathers-mongoose');
 const createModel = require('../../models/bids.model');
 const hooks = require('./bids.hooks');
 const filters = require('./bids.filters');
+//const { authenticate } = require('feathers-authentication').hooks;
+const auth = require('feathers-authentication-hooks');
 var RSMQWorker = require( "rsmq-worker" );
 var worker = new RSMQWorker( "webhook-queue" );
 const RedisSMQ = require("rsmq");
@@ -24,7 +26,7 @@ module.exports = function () {
 
     // Initialize our service with any options it requires
   app.use('/bids', createService(options));
-  app.service('/bids').create({ current_price: 10000 });
+  // app.service('/bids').create({ current_price: 10000 });
 
   // Get our initialized service so that we can register hooks and filters
   const service = app.service('bids');
@@ -40,12 +42,12 @@ module.exports = function () {
     //console.log('Message received.', resp);
 
   // Do long logic here
-      app.service('bids').create({
-        current_price: msg
-      });
-
+      //app.service('/bids').create({ current_price: msg });
      });
   	// console.log("Message id : " + id);
+    var arr = msg.split(" ");
+    app.service('/bids').create( { current_price: arr[0], bidder: arr[1] });
+
   	console.log(msg);
   	next()
   });
