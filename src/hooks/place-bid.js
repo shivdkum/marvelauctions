@@ -15,13 +15,14 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
     // that resolves with the `hook` object for asynchronous operations
     id = `${hook.data.top_bidder}`;
     price = `${hook.data.current_price}`;
+    productid = `${hook.data.product_id}`;
 
     rsmq.createQueue({ qname: 'webhook-queue'}, (err, resp) => {
     if (resp === 1) console.log('queue created');
 
   rsmq.sendMessage({
     qname: 'webhook-queue',
-    message: `${price} ${id}`,
+    message: `${price} ${id} ${productid}`,
   }, (err, resp) => {
     if (resp) console.log('Message sent. ID:', resp);
     });

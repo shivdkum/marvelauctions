@@ -46,7 +46,7 @@ module.exports = function () {
      });
   	// console.log("Message id : " + id);
     var arr = msg.split(" ");
-    app.service('/bids').create( { current_price: arr[0], bidder: arr[1] });
+    app.service('/bids').create( { current_price: arr[0], bidder: arr[1], product_id: arr[2] });
 
   	console.log(msg);
   	next()

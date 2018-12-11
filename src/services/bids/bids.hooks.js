@@ -11,8 +11,8 @@ const deletequeue = require('../../hooks/deletequeue');
 module.exports = {
   before: {
     all: [],
-    find: [redisBefore()],
-    get: [redisBefore()],
+    find: [],
+    get: [],
     create: [ auth.associateCurrentUser({ idField: 'username', as: 'bidder' })],
     update: [],
     patch: [],
@@ -21,8 +21,8 @@ module.exports = {
 
   after: {
     all: [],
-    find: [cache({duration: 3600 * 24 * 7}), redisAfter()],
-    get: [cache({duration: 3600 * 24 * 7}), redisAfter()],
+    find: [],
+    get: [],
     create: [
       deletequeue()
     ],
