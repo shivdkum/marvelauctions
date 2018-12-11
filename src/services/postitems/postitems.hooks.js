@@ -19,10 +19,7 @@ module.exports = {
       slotbooked(),
       auth.associateCurrentUser({ idField: 'username', as: 'seller_username' })
     ],
-    update: [ authenticate('jwt'),
-      placeBid(),
-      auth.associateCurrentUser({ idField: 'username', as: 'top_bidder' }),
-    ],
+    update: [ authenticate('jwt')],
     patch: [ authenticate('jwt'),
       placeBid(),
       auth.associateCurrentUser({ idField: 'username', as: 'top_bidder' }),

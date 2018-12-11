@@ -19,7 +19,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
     if (resp === 1) console.log('auction queue created');
 
   rsmq.sendMessage({
-    qname: 'webhook-queue',
+    qname: 'auction-queue',
     message: `${date} ${starttime}`,
   }, (err, resp) => {
     if (resp) console.log('Message sent. ID:', resp);

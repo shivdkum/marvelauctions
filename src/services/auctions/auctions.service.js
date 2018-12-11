@@ -44,7 +44,7 @@ module.exports = function () {
      });
   	// console.log("Message id : " + id);
    var arr = msg.split(" ");
-    app.service('/bids').remove( { date: arr[0], start_time: arr[1] });
+    app.service('/auctions').remove( { date: arr[0], start_time: arr[1] });
   	console.log(msg);
   	next()
   });
@@ -61,6 +61,9 @@ module.exports = function () {
   });
 
   worker.start();
+  //
+
+
 
   if (service.filter) {
     service.filter(filters);
